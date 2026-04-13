@@ -12,7 +12,7 @@
             <Label x:Name="Description" Content="Описание:" />
             <Label x:Name="Manufacturer" Content="Производитель:"/>
             <Label x:Name="Provider" Content="Поставщик:"/>
-            <Label x:Name="Price" Content="Цена:"/>
+            <TextBlock x:Name="Price" Text="Цена:" Margin="5"/>
             <Label x:Name="Unit" Content="Еденица измерения:"/>
             <Label x:Name="Quantity" Content="Количество на складе:"/>
         </StackPanel>

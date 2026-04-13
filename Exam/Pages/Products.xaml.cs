@@ -50,6 +50,7 @@ namespace Exam.Pages
             {
                 ProductsList.Children.Add(new Elements.Product(product));
             }
+            UserName.Content = MainWindow.User.FIO;
         }
         private void OpenAuthorizationPage(object sender, RoutedEventArgs e)
         {

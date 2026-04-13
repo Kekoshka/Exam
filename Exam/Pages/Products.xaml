@@ -11,7 +11,8 @@
     <Grid>
         <Grid Height="50" Background="#7FFF00" VerticalAlignment="Top">
             <Image Source="/Images/Icon.png" HorizontalAlignment="Left" Margin="5"/>
-            <Button Click="OpenAuthorizationPage    " Content="Назад" FontSize="14" HorizontalAlignment="Right" Width="100" Height="30" Background="#00FA9A" Margin="10"/>
+            <Label x:Name="UserName"  FontSize="14" HorizontalAlignment="Right" Margin="0,0,120,0" VerticalAlignment="Center"/>
+            <Button Click="OpenAuthorizationPage" Content="Назад" FontSize="14" HorizontalAlignment="Right" Width="100" Height="30" Background="#00FA9A" Margin="10"/>
         </Grid>
         <ScrollViewer Background="White" Margin="0,50,0,0">
             <StackPanel x:Name="ProductsList"/>

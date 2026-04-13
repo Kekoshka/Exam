@@ -36,6 +36,7 @@ namespace Exam.Pages
                 MessageBox.Show("Неверный логин или пароль!");
                 return;
             }
+            MainWindow.User = existedUser;
             MainWindow.Main.MainFrame.Navigate(new Products());
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Exam.Models;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -33,7 +34,7 @@ namespace Exam.Elements
             Description.Content = $"Описание товара: {product}";
             Manufacturer.Content = $"Производитель: {product.Manufacturer.Name}";
             Provider.Content = $"Поставщик:{product.Provider.Name}";
-            Price.Content = $"Цена: {product.Price}";
+            Price.Text = $"Цена: {product.Price}";
             Unit.Content = $"Еденица измерения: {product.Unit.Name}";
             Quantity.Content = $"Количество на складе: {product.QuantityStock}";
             Discount.Content = $"Скидка: {product.Discount}%";
@@ -47,14 +48,29 @@ namespace Exam.Elements
         {
             if (product.Discount <= 0)
                 return;
-            var discountPrice = product.Price - (product.Price / 100 * product.Discount);
+            var discountPrice = CalculatePrice(product.Price, product.Discount);
 
             var oldPrice = new Run(product.Price.ToString())
             {
                 TextDecorations = TextDecorations.Strikethrough,
                 Foreground = Brushes.Red,
             };
-            Price.Content = $"Цена: {oldPrice.Text} {discountPrice.ToString()}";
+            Price.Text = "";
+            Price.Inlines.Add("Цена: ");
+            Price.Inlines.Add(oldPrice);
+            Price.Inlines.Add(" " + discountPrice.ToString());
+        }
+        private int CalculatePrice(int basePrice, int discount)
+        {
+            try
+            {
+                var discountPrice = basePrice - (basePrice / 100 * discount);
+                return discountPrice;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
     }
 }
