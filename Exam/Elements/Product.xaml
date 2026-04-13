@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Exam.Elements"
              mc:Ignorable="d">
     <Grid x:Name="BaseGrid" Height="220" MinWidth="600">
-        <Image x:Name="Image" Margin="10" Source="/Resources/picture.png" Width="180" HorizontalAlignment="Left"/>
+        <Image x:Name="Image" Margin="10" Source="/Images/picture.png" Width="180" HorizontalAlignment="Left"/>
         <StackPanel Margin="200,10,100,10" VerticalAlignment="Center"  HorizontalAlignment="Left">
             <Label x:Name="CategoryAndName" Content="Категория товара | Наименование товара" FontWeight="Bold" FontSize="14"/>
             <Label x:Name="Description" Content="Описание:" />

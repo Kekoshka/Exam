@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="200">
-            <Image Source="/Resources/Icon.JPG" Height="100"/>
+            <Image Source="/Images/Icon.JPG" Height="100"/>
             <Label Content="вход в аккаунт" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
             <Label Content="логин" FontSize="14" HorizontalAlignment="Center"/>
             <TextBox x:Name="Login" Height="30"/>

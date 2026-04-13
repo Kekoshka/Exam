@@ -1,20 +1,9 @@
-﻿using Exam.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Exam.Elements
 {
@@ -36,7 +25,10 @@ namespace Exam.Elements
 
         private void SetData(Models.Product product)
         {
-            Image.Source = new BitmapImage(new Uri($"/Resources/{product.Image}"));
+            if (String.IsNullOrEmpty(product.Image))
+                Image.Source = new BitmapImage(new Uri($"{Directory.GetCurrentDirectory()}/Images/picture.png"));
+            else
+                Image.Source = new BitmapImage(new Uri($"{Directory.GetCurrentDirectory()}/Images/{product.Image}"));
             CategoryAndName.Content = $"{product.Category.Name} | {product.ProductType.Name}";
             Description.Content = $"Описание товара: {product}";
             Manufacturer.Content = $"Производитель: {product.Manufacturer.Name}";
