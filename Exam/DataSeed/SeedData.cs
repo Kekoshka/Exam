@@ -71,45 +71,4 @@ namespace Exam.DataSeed
             }
         };
     }
-    public static class ProductTypeSeed
-    {
-        public static readonly List<ProductType> ProductTypes = new()
-        {
-            new()
-            {
-                Id = 1,
-                Name = "Ботинки"
-            },
-            new()
-            {
-                Id = 2,
-                Name = "Кеды"
-            },
-            new()
-            {
-                Id = 3,
-                Name = "Кроссовки"
-            },
-            new()
-            {
-                Id = 4,
-                Name = "Полуботинки"
-            },
-            new()
-            {
-                Id = 5,
-                Name = "Сапоги"
-            },
-            new()
-            {
-                Id = 6,
-                Name = "Тапочки"
-            },
-            new()
-            {
-                Id = 7,
-                Name = "Туфли"
-            }
-        };
-    }
 }

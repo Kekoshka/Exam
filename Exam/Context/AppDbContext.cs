@@ -22,7 +22,6 @@ namespace Exam.Context
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<PickupPoint> PickupPoints { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Unit> Units { get; set; }
@@ -35,10 +34,8 @@ namespace Exam.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<OrderProduct>().HasKey(op => new { op.OrderId, op.ProductId });
             modelBuilder.Entity<Category>().HasData(CategorySeed.Categories);
             modelBuilder.Entity<OrderStatus>().HasData(OrderStatusSeed.OrderStatuses);
-            modelBuilder.Entity<ProductType>().HasData(ProductTypeSeed.ProductTypes);
             modelBuilder.Entity<Role>().HasData(RoleSeed.Roles);
             modelBuilder.Entity<Unit>().HasData(UnitSeed.Units);
         }

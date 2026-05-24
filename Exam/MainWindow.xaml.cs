@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +22,9 @@ namespace Exam
             Main = this;
             MainFrame.Navigate(new Pages.Authorization());
         }
+
+        public static string GetImagePathByFileName(string fileName) =>
+            $"{Directory.GetCurrentDirectory()}/Images/{fileName}";
 
     }
 }

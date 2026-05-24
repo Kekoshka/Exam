@@ -28,33 +28,84 @@ namespace Exam.Pages
         public Products()
         {
             InitializeComponent();
-            _products = LoadData();
-            SetData(_products);
+            LoadInterfaceByRoles();
+            LoadInterface();
         }
 
-        private List<Models.Product> LoadData()
+        private void LoadInterface()
         {
             using var context = new AppDbContext();
-            return context.Products
+            _products = context.Products
                 .Include(p => p.Manufacturer)
-                .Include(p => p.ProductType)
                 .Include(p => p.Provider)
                 .Include(p => p.Category)
                 .Include(p => p.Unit)
-                .Include(p => p.ProductType)
                 .ToList();
-        }
-        private void SetData(List<Models.Product> products)
-        {
-            foreach(var product in products)
+
+            foreach (var product in _products)
             {
                 ProductsList.Children.Add(new Elements.Product(product));
             }
             UserName.Content = MainWindow.User.FIO;
+            var manufacturers = context.Manufacturers.ToList();
+            manufacturers.Insert(0, new Manufacturer() { Id = 0, Name = "Все поставщики" });
+            Manufacturers.ItemsSource = manufacturers;
         }
+
+        private void LoadInterfaceByRoles()
+        {
+            if(MainWindow.User.Role.Id == 3)
+            {
+                OpenAddProductPageBtn.Visibility = Visibility.Visible;
+                OpenOrdersPageBtn.Visibility = Visibility.Visible;
+            }
+            if (MainWindow.User.Role.Id == 2)
+            {
+                OpenOrdersPageBtn.Visibility = Visibility.Visible;
+            }
+        }
+
         private void OpenAuthorizationPage(object sender, RoutedEventArgs e)
         {
             MainWindow.Main.MainFrame.Navigate(new Authorization());
         }
+
+        private void OpenOrdersPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Main.MainFrame.Navigate(new Orders());
+        }
+
+        private void OpenAddProductPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Main.MainFrame.Navigate(new SaveProduct());
+        }
+
+        private void SortProducts()
+        {
+            using var context = new AppDbContext();
+            var productsQuery = _products.AsQueryable();
+            productsQuery = productsQuery.Where(p =>
+                (p.Manufacturer.Name.Contains(Search.Text) ||
+                p.Provider.Name.Contains(Search.Text) ||
+                p.Category.Name.Contains(Search.Text) ||
+                p.Unit.Name.Contains(Search.Text)));
+            if(Manufacturers.SelectedIndex > 0)
+                productsQuery = productsQuery.Where(p => p.ManufacturerId == (int)Manufacturers.SelectedValue);
+            if(OrderBy.SelectedIndex == 1)
+                productsQuery = productsQuery.OrderBy(p => p.QuantityStock);
+            else if(OrderBy.SelectedIndex == 2)
+                productsQuery = productsQuery.OrderByDescending(p => p.QuantityStock);
+
+            var products = productsQuery.ToList();
+            ProductsList.Children.Clear();
+            foreach(var product in products)
+                ProductsList.Children.Add(new Elements.Product(product));
+        }
+
+        private void SortProducts(object sender, TextChangedEventArgs e) =>
+            SortProducts();
+
+        private void SortProducts(object sender, SelectionChangedEventArgs e) =>
+            SortProducts();
     }
 }

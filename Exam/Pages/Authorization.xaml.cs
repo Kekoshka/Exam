@@ -30,7 +30,9 @@ namespace Exam.Pages
         private async void OpenProductsPage(object sender, RoutedEventArgs e)
         {
             using var context = new AppDbContext();
-            var existedUser = await context.Users.FirstOrDefaultAsync(u => u.Login == Login.Text && u.Password == Password.Text);
+            var existedUser = await context.Users
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(u => u.Login == Login.Text && u.Password == Password.Text);
             if (existedUser is null)
             {
                 MessageBox.Show("Неверный логин или пароль!");

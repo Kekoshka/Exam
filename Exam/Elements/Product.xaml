@@ -19,5 +19,8 @@
         <Grid Margin="10">
             <Label x:Name="Discount" Content="Скидка: 0%" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         </Grid>
+        <Button Click="Delete" x:Name="DeleteBtn" Content="Удалить" Visibility="Hidden" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,120,10"/>
+        <Button Click="Edit" x:Name="EditBtn" Content="Изменить" Visibility="Hidden" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
+
     </Grid>
 </UserControl>
